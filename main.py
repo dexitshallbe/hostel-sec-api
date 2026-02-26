@@ -14,14 +14,19 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(auth.router)
-app.include_router(sites.router)
-app.include_router(cameras.router)
-app.include_router(events.router)
-app.include_router(ws.router)
-app.include_router(users.router)
-app.include_router(agents.router)
+@app.get("/")
+def root():
+    return {"ok": True, "service": "hostel-sec-api", "docs": "/docs"}
 
 @app.get("/health")
 def health():
-    return {"ok": True}
+    return {"status": "healthy"}
+
+# Routers
+app.include_router(auth.router, prefix="/auth", tags=["auth"])
+app.include_router(users.router, prefix="/users", tags=["users"])
+app.include_router(sites.router, prefix="/sites", tags=["sites"])
+app.include_router(cameras.router, prefix="/cameras", tags=["cameras"])
+app.include_router(events.router, prefix="/events", tags=["events"])
+app.include_router(agents.router, prefix="/agents", tags=["agents"])
+app.include_router(ws.router, prefix="/ws", tags=["ws"])
