@@ -23,10 +23,10 @@ def health():
     return {"status": "healthy"}
 
 # Routers
-app.include_router(auth.router, prefix="/auth", tags=["auth"])
-app.include_router(users.router, prefix="/users", tags=["users"])
-app.include_router(sites.router, prefix="/sites", tags=["sites"])
-app.include_router(cameras.router, prefix="/cameras", tags=["cameras"])
-app.include_router(events.router, prefix="/events", tags=["events"])
-app.include_router(agents.router, prefix="/agents", tags=["agents"])
-app.include_router(ws.router, prefix="/ws", tags=["ws"])
+app.include_router(auth.router, tags=["auth"])
+app.include_router(users.router, tags=["users"])
+app.include_router(sites.router, tags=["sites"])
+app.include_router(cameras.router, tags=["cameras"])
+app.include_router(events.router, tags=["events"])
+app.include_router(agents.router, tags=["agents"])
+app.include_router(ws.router, tags=["ws"])
