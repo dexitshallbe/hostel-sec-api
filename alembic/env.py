@@ -7,6 +7,8 @@ from sqlalchemy import engine_from_config, pool
 from alembic import context
 from dotenv import load_dotenv
 
+from app.settings import settings
+
 load_dotenv()
 
 config = context.config
@@ -44,6 +46,8 @@ def run_migrations_offline() -> None:
 def run_migrations_online() -> None:
     configuration = config.get_section(config.config_ini_section) or {}
     configuration["sqlalchemy.url"] = get_url()
+
+    config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
 
     connectable = engine_from_config(
         configuration,
